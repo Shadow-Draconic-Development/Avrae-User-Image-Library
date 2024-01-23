@@ -1,0 +1,137 @@
+embed
+<drac2>
+# *******************************************************
+# * This work includes material written by Seth Hartman (aka ShadowsStride)
+# * and is licensed under the Creative Commons Attribution 4.0 International 
+# * License available at https://creativecommons.org/licenses/by/4.0/legalcode.
+# *******************************************************
+
+
+def search_key(query: str, key_list: list[str]) -> list[str]|str:
+    """
+    Searches for dictionary key.
+
+    Args:
+        query (str): The query being made
+        key_list (list): List of keys
+
+    Return:
+        (str): If it finds it, it returns the key, otherwise it returns 'None'
+    """
+
+    # Creates list to store matches
+    key_results = []
+
+    # Checks each item if a match occurs
+    for key in key_list:
+
+        # If matches
+        if query.lower() in key.lower():
+            key_results.append(key)
+
+        else:
+            pass
+
+    # Finds at least 1 match
+    if len(key_results) > 0:
+        return key_results
+
+    # If it finds no matches
+    else:
+        return 'None'
+
+
+def remove_image(img_name: str) -> list[str]:
+    """
+    Function that handles removing the image requested.
+
+    Args:
+        img_name (str): Name of the image
+
+    Return:
+        ['status', 'status message']
+    
+    """
+
+    # Pulls and checks if the uvar exists
+    image_test = get_uvar("imageLibrary", default="None")
+
+    if image_test != "None":
+
+        # Grabs dictionary and then searches dictionary for matches
+        image_dict = load_json(image_test)
+        key_result = search_key(img_name, image_dict.keys())
+
+    # If it comes back with at least one match
+    if key_result != "None":
+
+        if len(key_result) == 1:
+
+            # Creates backup uvar incase user deletes incorrect image
+            set_uvar("imageLibraryBackup", dump_json(image_dict))
+
+            # Creates a new dictionary excluding the key:value that was requested to be removed
+            new_image_dict = {key: val for key, val in image_dict.items() if key != key_result[0]}
+
+            # Sets uvar to new dictionary
+            set_uvar("imageLibrary", dump_json(new_image_dict))
+
+            return ["Success", f"{ctx.author.display_name}: {img_name} has been removed from your image library"]
+
+        else:
+            for dict_key in key_result:
+                if dict_key.lower() != img_name.lower():
+                    pass
+
+                else:
+
+                    # Creates backup uvar incase user deletes incorrect image
+                    set_uvar("imageLibraryBackup", dump_json(image_dict))
+
+                    # Creates a new dictionary excluding the key:value that was requested to be removed
+                    new_image_dict = {key: val for key, val in image_dict.items() if key != dict_key}
+
+                    # Sets uvar to new dictionary
+                    set_uvar("imageLibrary", dump_json(new_image_dict))
+
+                    return ["Success", f"{ctx.author.display_name}: {img_name} has been removed from your image library"]
+
+            key_result.insert(0, "**Multiple images found:**")
+
+            return ["Error", "\n".join(key_result)]
+
+
+def main(input_list: list[str]) -> list[str]:
+    """
+    Main program function
+
+    Args:
+        inputs (list[str]): List containing image name
+    
+    Return:
+        ['title of embed', 'caption of embed', 'image url']
+    """
+
+    # If there is at least one input, though it ignores additional inputs other than the first
+    if len(input_list) > 0:
+        result_list = remove_image(input_list[0])
+
+    else:
+        return [f"{ctx.author.display_name} has encountered an error", "Expected one argument", "https://raw.githubusercontent.com/SethHartman13/Avrae-Aliases-Snippets/master/Aliases/image/image.png"]
+
+    if result_list[0] != "Error":
+        return [result_list[1], "", "https://raw.githubusercontent.com/SethHartman13/Avrae-Aliases-Snippets/master/Aliases/image/rubble.png"]
+
+    else:
+        return [f"{ctx.author.display_name} has encountered an error", result_list[1], "https://raw.githubusercontent.com/SethHartman13/Avrae-Aliases-Snippets/master/Aliases/image/image.png"]
+
+
+# Call main program
+response_list = main(&ARGS&)
+
+
+</drac2>
+-title "{{response_list[0]}}"
+-f "{{response_list[1]}}"
+-image "{{response_list[2]}}"
+-footer "!image remove [image name] | Updated 7/8/23 | ShadowsStride"

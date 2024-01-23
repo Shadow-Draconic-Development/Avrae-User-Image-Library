@@ -1,0 +1,125 @@
+embed
+<drac2>
+# *******************************************************
+# * This work includes material written by Seth Hartman (aka ShadowsStride)
+# * and is licensed under the Creative Commons Attribution 4.0 International 
+# * License available at https://creativecommons.org/licenses/by/4.0/legalcode.
+# *******************************************************
+
+
+def search_key(query: str, key_list: list[str]) -> list[str]|str:
+    """
+    Searches for dictionary key.
+
+    Args:
+        query (str): The query being made
+        key_list (list): List of keys
+
+    Return:
+        (str): If it finds it, it returns the key, otherwise it returns 'None'
+    """
+
+    # Creates list to store matches
+    key_results = []
+
+    # Checks each item if a match occurs
+    for key in key_list:
+
+        # If matches
+        if query.lower() in key.lower():
+            key_results.append(key)
+
+        else:
+            pass
+
+    # Finds at least 1 match
+    if len(key_results) > 0:
+        return key_results
+
+    # If it finds no matches
+    else:
+        return 'None'
+
+
+def get_image(img_name: str) -> list[str]:
+    """
+    Function that handles grabbing the image requested.
+    
+    Args:
+        img_name (str): Name of the image
+
+    Return:
+        ['status', 'status message']
+    """
+
+    # Pulls and checks if uvar exists
+    image_test = get_uvar("imageLibrary", default="None")
+
+    if image_test != "None":
+        
+        # Grabs dictionary and then searches dictionary for matches
+        image_dict = load_json(image_test)
+        key_result = search_key(img_name, image_dict.keys())
+
+        # If it comes back with at least one match
+        if key_result != "None":
+
+            # If it comes with only one match
+            if len(key_result) == 1:
+                return ["Success", image_dict[key_result[0]], key_result[0]]
+
+            # If it comes with multiple matches
+            else:
+                for key in key_result:
+                    if name.lower() == key.lower():
+                        return ["Success", image_dict[key], key]
+
+                    else:
+                        pass
+
+                key_result.insert(0, "**Multiple images found:**")
+
+                return ["Error", "\n".join(key_result)]
+
+        # If it comes back with no matches
+        else:
+            return ["Error", "Image not found!"]
+
+    # If the uvar does not exist
+    else:
+        return ['Error', "Uvar `imageLibrary` does not exist!"]
+
+
+def main(input_list: list[str]) -> list[str]:
+    """
+    Main program function
+
+    Args:
+        inputs (list[str]): List containing image name.
+
+    Return:
+        ['title of embed', 'caption of embed', 'image url']
+    """
+
+    if len(input_list) > 0:
+        results = get_image(input_list[0])
+
+    else:
+        return [f"{ctx.author.display_name} has encountered an error", "Expected one argument", "https://raw.githubusercontent.com/SethHartman13/Avrae-Aliases-Snippets/master/Aliases/image/image.png"]
+
+    if results[0] != "Error":
+        return [f"{ctx.author.display_name}'s Image:", results[2], results[1]]
+
+    else:
+        return [f"{ctx.author.display_name} has encountered an error", results[1], "https://raw.githubusercontent.com/SethHartman13/Avrae-Aliases-Snippets/master/Aliases/image/image.png"]
+
+
+# Call main program
+response_list = main(&ARGS&)
+
+
+</drac2>
+-title "{{response_list[0]}}"
+-f "{{response_list[1]}}"
+-image "{{response_list[2]}}"
+-footer "!image [image name] | Updated 7/8/23 | ShadowsStride"
