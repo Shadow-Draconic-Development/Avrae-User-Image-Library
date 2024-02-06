@@ -1,0 +1,53 @@
+embed
+<drac2>
+# *******************************************************
+# * This work includes material written by Seth Hartman (aka ShadowsStride)
+# * and is licensed under the Creative Commons Attribution 4.0 International 
+# * License available at https://creativecommons.org/licenses/by/4.0/legalcode.
+# *******************************************************
+
+
+def main() -> tuple(str, str, str):
+    """
+    Main program function
+
+    Return:
+        str: Title
+        str: Body content
+        str: Image URL
+    """
+
+    # If UVAR exists, load dictionary
+    if (uvar_test := get_uvar("imageLibrary")):
+        uvar_dict = load_json(uvar_test)
+
+        # If there is at least one image
+        if len(uvar_dict) > 0:
+
+            # Pull list of names and pick random name
+            image_names = list(uvar_dict.keys())
+            rand_name = randchoice(image_names)
+
+            # Insert header
+            image_names.append(f"\n**Random image from library:** {rand_name}")
+
+            return "Your Image Library", "\n".join(image_names), uvar_dict[rand_name]
+
+        # If there are no images
+        else:
+            return "Your Image Library", "Empty", "You Have Been Sneak Attacked by an Error", "Your image library has not been created yet", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/empty.png"
+
+    # If IVAR does not exist
+    else:
+        return "You Have Been Sneak Attacked by an Error", "Your image library has not been created yet", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
+
+
+# Main program function
+title, f, image = main()
+
+
+</drac2>
+-title "{{title}}"
+-f "{{f}}"
+-image "{{image}}"
+-footer "{{ctx.prefix}}image list | 2/6/24 | ShadowsStride"
