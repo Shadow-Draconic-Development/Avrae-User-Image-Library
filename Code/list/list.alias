@@ -37,7 +37,7 @@ def main() -> tuple(str, str, str):
         else:
             return "Your Image Library", "Empty", "You Have Been Sneak Attacked by an Error", "Your image library has not been created yet", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/empty.png"
 
-    # If IVAR does not exist
+    # If UVAR does not exist
     else:
         return "You Have Been Sneak Attacked by an Error", "Your image library has not been created yet", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
 
