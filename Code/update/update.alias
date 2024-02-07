@@ -1,5 +1,10 @@
 embed
 <drac2>
+# *******************************************************
+# * This work includes material written by Seth Hartman (aka ShadowsStride)
+# * and is licensed under the Creative Commons Attribution 4.0 International 
+# * License available at https://creativecommons.org/licenses/by/4.0/legalcode.
+# *******************************************************
 
 
 def search_list(query: str, item_list: list[str]) -> list[str]|None:
@@ -21,7 +26,6 @@ def search_list(query: str, item_list: list[str]) -> list[str]|None:
     # If it finds no matches
     else:
         return None
-
 
 
 def main(input_list: list[str]) -> tuple(str, str, str):
