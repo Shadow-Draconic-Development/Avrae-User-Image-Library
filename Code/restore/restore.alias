@@ -16,6 +16,7 @@ def main() -> tuple(str, str, str):
         str: Image URL
     """
 
+    # If backup and main UVARs exist, switch contents of backup and main
     if (uvar_test := get_uvar("imageLibrary")) and (uvar_backup_test := get_uvar("imageLibraryBackup")):
 
         set_uvar("imageLibrary", uvar_backup_test)
@@ -23,6 +24,7 @@ def main() -> tuple(str, str, str):
 
         return "Image Library Backup Restored", "", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/restore.png"
 
+    # If backup and/or main UVARS do not exist
     else:
         return "You Have Been Sneak Attacked by an Error", "Your Image Library/Backup does not exist", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
 
@@ -35,4 +37,4 @@ title, f, image = main()
 -title "{{title}}"
 -f "{{f}}"
 -image "{{image}}"
--footer "{{ctx.prefix}}image restore | Updated 2/6/23 | ShadowsStride"
+-footer "{{ctx.prefix}}image restore | Updated 2/7/23 | ShadowsStride"

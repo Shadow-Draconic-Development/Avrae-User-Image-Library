@@ -25,11 +25,11 @@ def main() -> tuple(str, str, str):
         if len(uvar_dict) > 0:
 
             # Pull list of names and pick random name
-            image_names = list(uvar_dict.keys())
-            rand_name = randchoice(image_names)
+            image_names = [f"`{item}`" for item in list(uvar_dict.keys())]
+            rand_name = randchoice(image_names).strip("`")
 
             # Insert header
-            image_names.append(f"\n**Random image from library:** {rand_name}")
+            image_names.append(f"\n**Random image from library:** `{rand_name}`")
 
             return "Your Image Library", "\n".join(image_names), uvar_dict[rand_name]
 
@@ -50,4 +50,4 @@ title, f, image = main()
 -title "{{title}}"
 -f "{{f}}"
 -image "{{image}}"
--footer "{{ctx.prefix}}image list | 2/6/24 | ShadowsStride"
+-footer "{{ctx.prefix}}image list | 2/7/24 | ShadowsStride"

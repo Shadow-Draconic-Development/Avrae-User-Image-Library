@@ -49,7 +49,7 @@ def main(input_list: list[str]) -> tuple(str, str, str):
             uvar_dict = load_json(uvar_test)
 
             # If there is at least one match
-            if (search_result := search_list(input_list[0]), uvar_dict.keys()):
+            if (search_result := search_list(input_list[0], uvar_dict.keys())):
 
                 # If there is exactly one match, backup dictionary, update dictionary
                 if len(search_result) == 1:
@@ -57,7 +57,7 @@ def main(input_list: list[str]) -> tuple(str, str, str):
                     image_url = uvar_dict.pop(search_result[0])
                     set_uvar("imageLibrary", dump_json(uvar_dict))
 
-                    return f"{search_result[0]} Removed From Image Library", "", image_url
+                    return f"`{search_result[0]}` Removed From Image Library", "", image_url
 
                 # If there is more than one match
                 else:
@@ -75,9 +75,10 @@ def main(input_list: list[str]) -> tuple(str, str, str):
                             image_url = uvar_dict.pop(match)
                             set_uvar("imageLibrary", dump_json(uvar_dict))
 
-                            return f"{match} Removed From Image Library", "", image_url
+                            return f"`{match}` Removed From Image Library", "", image_url
 
-                    # Insert header
+                    search_result = [f"`{item}`" for item in search_result]
+
                     search_result.insert(0, "**Multiple Matches Found:**")
 
                     return "You Have Been Sneak Attacked by an Error", "\n".join(search_result), "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
@@ -103,4 +104,4 @@ title, f, image = main(&ARGS&)
 -title "{{title}}"
 -f "{{f}}"
 -image "{{image}}"
--footer "{{ctx.prefix}}image remove | 2/6/24 | ShadowsStride"
+-footer "{{ctx.prefix}}image remove [image name] | 2/7/24 | ShadowsStride"

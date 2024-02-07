@@ -58,7 +58,7 @@ def main(input_list: list[str]) -> tuple(str, str, str):
                     uvar_dict[input_list[0]] = input_list[1]
                     set_uvar("imageLibrary", dump_json(uvar_dict))
 
-                    return f"{input_list[0]} Has Been Added to your Library", "", input_list[1]
+                    return f"`{input_list[0]}` Has Been Added to your Library", "", input_list[1]
 
                 # If at least one image is found
                 else:
@@ -78,13 +78,13 @@ def main(input_list: list[str]) -> tuple(str, str, str):
                     uvar_dict[input_list[0]] = input_list[1]
                     set_uvar("imageLibrary", dump_json(uvar_dict))
 
-                    return f"{input_list[0]} Has Been Added to your Library", "", input_list[1]
+                    return f"`{input_list[0]}` Has Been Added to your Library", "", input_list[1]
 
             # If UVAR does not exist, create and update UVAR
             else:
                 set_uvar("imageLibrary", dump_json({input_list[0]: input_list[1]}))
 
-                return f"{input_list[0]} Has Been Added to your Library", "", input_list[1]
+                return f"`{input_list[0]}` Has Been Added to your Library", "", input_list[1]
 
         # If image does not pass initial check
         else:
@@ -103,4 +103,4 @@ title, f, image = main(&ARGS&)
 -title "{{title}}"
 -f "{{f}}"
 -image "{{image}}"
--footer "{{ctx.prefix}}image add [image name] [image url] | 2/6/24 | ShadowsStride"
+-footer "{{ctx.prefix}}image add [image name] [image url] | 2/7/24 | ShadowsStride"
