@@ -53,7 +53,7 @@ def main(input_list: list[str]) -> tuple(str, str, str):
                 
                 # If there is exactly one match
                 if len(search_result) == 1:
-                    return f"Image: {search_result[0]}", "", uvar_dict[search_result[0]]
+                    return f"Image: `{search_result[0]}`", "", uvar_dict[search_result[0]]
 
                 # If there is more than one match
                 else:
@@ -67,9 +67,9 @@ def main(input_list: list[str]) -> tuple(str, str, str):
 
                         # If it does exactly match
                         else:
-                            return f"Image: {match}", "", uvar_dict[match]
+                            return f"Image: `{match}`", "", uvar_dict[match]
 
-                    # If not matches found, insert error message
+                    search_result = [f"`{item}`" for item in search_result]
                     search_result.insert(0, "**Multiple Matches Found:**")
 
                     return "You Have Been Sneak Attacked by an Error", "\n".join(search_result), "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
@@ -95,4 +95,4 @@ title, f, image = main(&ARGS&)
 -title "{{title}}"
 -f "{{f}}"
 -image "{{image}}"
--footer "{{ctx.prefix}} [image name] | 2/6/24 | ShadowsStride"
+-footer "{{ctx.prefix}}image [image name] | 2/7/24 | ShadowsStride"

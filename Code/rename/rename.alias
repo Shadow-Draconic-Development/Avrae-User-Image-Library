@@ -41,49 +41,123 @@ def main(input_list: list[str]) -> tuple(str, str, str):
         str: Image URL
     """
 
+    # If there were at least two inputs
     if len(input_list) > 1:
 
+        # If UVAR exists, load dictionary
         if (uvar_test := get_uvar("imageLibrary", default="None")):
             uvar_dict = load_json(uvar_test)
 
+            # Search for old image name and new image name
             search_result1 = search_list(input_list[0], uvar_dict.keys())
             search_result2 = search_list(input_list[1], uvar_dict.keys())
 
-            match 
+            match search_result1, search_result2:
 
+                # If it did not find the old image name
+                case None, _:
+                    return "You Have Been Sneak Attacked by an Error", f"Image not found (`{input_list[0]}`)", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
 
+                # If it did find at least one match for old image name and no matches for new image name
+                case _, None:
 
+                    # If exactly one match for old image name
+                    if len(search_result1) == 1:
+                        uvar_dict[input_list[1]] = uvar_dict.pop(search_result1[0])
 
+                        set_uvar("imageLibrary", dump_json(uvar_dict))
 
-            if (search_result1 := search_list(input_list[0], uvar_dict))
+                        return f"`{search_result1[0]}` -> `{input_list[1]}`", "Image name updated", uvar_dict[input_list[1]]
 
+                    # If more than one match for old image name
+                    else:
 
+                        # For each match
+                        for match in search_result1:
 
+                            # If it does not exactly match
+                            if match.lower() != input_list[0].lower():
+                                pass
+
+                            # If it does exactly match
+                            else:
+                                uvar_dict[input_list[1]] = uvar_dict.pop(match)
+
+                                set_uvar("imageLibrary", dump_json(uvar_dict))
+
+                                return f"`{match}` -> `{input_list[1]}`", "Image name updated", uvar_dict[input_list[1]]
+
+                        # Format output
+                        search_result1 = [f"`{item}`" for item in search_result1]
+                        search_result1.insert(0, "**Mutliple Matches Found:**")
+
+                        return "You Have Been Sneak Attacked by an Error", "\n".join(search_result1), "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
+
+                # If it found a match for both old and new image names
+                case _, _:
+
+                    # If exactly one match for old image name
+                    if len(search_result1) == 1:
+                        input_list[0] = search_result1[0]
+
+                    # If more than one match for old image name
+                    else:
+                        found = False
+
+                        # For each match
+                        for match in search_result1:
+
+                            # If it does not exactly match
+                            if match.lower() != input_list[0].lower():
+                                pass
+
+                            # If it does exactly match
+                            else:
+                                input_list[0] = match
+                                found = True
+
+                        # If match found
+                        if found:
+                            pass
+
+                        # If match not found, format output
+                        else:
+                            search_result1 = [f"`{item}`" for item in search_result1]
+                            search_result1.insert(0, "**Mutliple Matches Found:**")
+
+                            return "You Have Been Sneak Attacked by an Error", "\n".join(search_result1), "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
+
+                    # For each match for new image name
+                    for match in search_result2:
+
+                        # If it does not exactly match
+                        if match.lower() != input_list[1].lower():
+                            pass
+
+                        # If match does exactly match
+                        else:
+                            return "You Have Been Sneak Attacked by an Error", "The new image name already exists", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
+
+                    uvar_dict[input_list[1]] = uvar_dict.pop(input_list[0])
+                    set_uvar("imageLibrary", dump_json(uvar_dict))
+
+                    return f"`{search_result1[0]}` -> `{input_list[1]}`", "Image name updated", uvar_dict[input_list[1]]
+
+        # If UVAR does not exist
         else:
-            return "You Have Been Sneak Attacked by an Error"
+            return "You Have Been Sneak Attacked by an Error", "Image library has not been setup", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
 
-
-
-
-
+    # If there were not at least two inputs
     else:
-        return "You Have Been Sneak Attacked by an Error"
+        return "You Have Been Sneak Attacked by an Error", "Expected the old image name and the new image name", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Main program function         
+title, f, image = main(&ARGS&)
 
 
 </drac2>
+-title "{{title}}"
+-f "{{f}}"
+-image "{{image}}"
+-footer "{{ctx.prefix}}image rename [old image name] [new image name] | 2/7/24 | ShadowsStride"

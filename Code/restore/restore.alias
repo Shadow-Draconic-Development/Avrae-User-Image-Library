@@ -1,0 +1,40 @@
+embed
+<drac2>
+# *******************************************************
+# * This work includes material written by Seth Hartman (aka ShadowsStride)
+# * and is licensed under the Creative Commons Attribution 4.0 International 
+# * License available at https://creativecommons.org/licenses/by/4.0/legalcode.
+# *******************************************************
+
+def main() -> tuple(str, str, str):
+    """
+    Main program function
+
+    Return:
+        str: Title
+        str: Body content
+        str: Image URL
+    """
+
+    # If backup and main UVARs exist, switch contents of backup and main
+    if (uvar_test := get_uvar("imageLibrary")) and (uvar_backup_test := get_uvar("imageLibraryBackup")):
+
+        set_uvar("imageLibrary", uvar_backup_test)
+        set_uvar("imageLibraryBackup", uvar_test)
+
+        return "Image Library Backup Restored", "", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/restore.png"
+
+    # If backup and/or main UVARS do not exist
+    else:
+        return "You Have Been Sneak Attacked by an Error", "Your Image Library/Backup does not exist", "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/error.png"
+
+
+# Call main program
+title, f, image = main()
+
+
+</drac2>
+-title "{{title}}"
+-f "{{f}}"
+-image "{{image}}"
+-footer "{{ctx.prefix}}image restore | Updated 2/7/23 | ShadowsStride"
