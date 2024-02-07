@@ -1,0 +1,14 @@
+embed
+<drac2>
+# *******************************************************
+# * This work includes material written by Seth Hartman (aka ShadowsStride)
+# * and is licensed under the Creative Commons Attribution 4.0 International 
+# * License available at https://creativecommons.org/licenses/by/4.0/legalcode.
+# *******************************************************
+
+
+</drac2>
+-title "You Need Help!"
+-f f"`help` has been depreciated, please use `help {{l}}alias>` instead in order to recieve help"
+-thumb "https://raw.githubusercontent.com/Shadow-Draconic-Development/Avrae-User-Image-Library/main/Data/main.png"
+-footer "{{ctx.prefix}}image help | 2/7/24 | ShadowsStride"
