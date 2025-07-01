@@ -37,4 +37,4 @@ title, f, image = main()
 -title "{{title}}"
 -f "{{f}}"
 -image "{{image}}"
--footer "{{ctx.prefix}}image restore | Updated 2/7/23 | ShadowsStride"
+-footer "{{ctx.prefix}}image restore | 2/7/23 | ShadowsStride"
