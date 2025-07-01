@@ -1,6 +1,9 @@
 <h1>User Image Library<img align="right" src="./Data/main.png" width="100px"></h1>
 
-The User Image Library allows for users to store images to be pulled up later. The character limit on UVARs (As of 2/6/2024) is 10,000 characters. Check [here](https://github.com/avrae/avrae/blob/85b9ffdf4d70f0a9d9b9ab91b6a02f894766128e/aliasing/constants.py) for current values. Based upon the length of URLS created by Discord attachment URLs, this library allows for about 46 images. To be safe, I would not attempt to have any more than 30 images without any sort of URL shorteners.
+The User Image Library allows for users to store images to be pulled up later. 
+
+
+The character limit on UVARs (As of 2/6/2024) is 10,000 characters. Check [here](https://github.com/avrae/avrae/blob/85b9ffdf4d70f0a9d9b9ab91b6a02f894766128e/aliasing/constants.py) for current values. Based upon the length of URLS created by Discord attachment URLs, this library allows for about 46 images. To be safe, I would not attempt to have any more than 30 images without any sort of URL shorteners.
 
 [Table of Contents](https://github.com/Shadow-Draconic-Development/Avrae-User-Image-Library/blob/main/ToC.md)
 [Shadow's Main Website](https://shadow-draconic-development.github.io/.github/)
