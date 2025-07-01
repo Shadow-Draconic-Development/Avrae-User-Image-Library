@@ -28,7 +28,7 @@ def search_list(query: str, item_list: list[str]) -> list[str]|None:
         return None
 
 
-def main(input_list: list[str]) -> tuple(str, str, str):
+def main(input_list: list[str]) -> tuple[str, str, str]:
     """
     Main program function
 
@@ -95,4 +95,4 @@ title, f, image = main(&ARGS&)
 -title "{{title}}"
 -f "{{f}}"
 -image "{{image}}"
--footer "{{ctx.prefix}}image [image name] | 2/7/24 | ShadowsStride"
+-footer "{{ctx.prefix}}image [image name] | 7/1/24 | ShadowsStride"
