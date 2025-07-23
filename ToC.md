@@ -7,6 +7,7 @@ Table of contents within this content library.
     - `image add` [Markdown](./Code/add/add.md)
     - ~~`image help` [Markdown](./Code/help/help.md)~~ **DEPRECIATED**
     - `image list` [Markdown](./Code/list/list.md)
+    - `image portrait` [Markdown](./Code/portrait/portrait.md)
     - `image remove` [Markdown](./Code/remove/remove.md)
     - `image rename` [Markdown](./Code/rename/rename.md)
     - `image restore` [Markdown](./Code/restore/restore.md)
